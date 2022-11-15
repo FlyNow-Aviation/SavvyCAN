@@ -282,7 +282,7 @@ DBCSignalEditor::DBCSignalEditor(QWidget *parent) :
                 DBC_SIGNAL *oldParent = currentSignal->multiplexParent;
                 if (newSig)
                 {
-                    oldParent->multiplexedChildren.removeOne(currentSignal);
+                    if (oldParent) oldParent->multiplexedChildren.removeOne(currentSignal);
                     currentSignal->multiplexParent = newSig;
                     newSig->multiplexedChildren.append(currentSignal);
                     dbcFile->setDirtyFlag();
