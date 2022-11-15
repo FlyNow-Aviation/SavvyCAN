@@ -1597,6 +1597,21 @@ bool DBCFile::saveFile(QString fileName)
 
                 if (sig->isMultiplexed)
                 {
+                    if (sig->multiplexParent == nullptr)  {
+                        QMessageBox msgBox;
+                        QString msg = "could not save DBC file as at least one signal is defect!\n";
+                        msg += "extended multiplexed signal " + sig->name + " multiplexed parent is not set!\n";
+                        msgBox.setText(msg);
+                        msgBox.exec();
+                        attrValOutput.clear();
+                        defaultsOutput.clear();
+                        commentsOutput.clear();
+                        valuesOutput.clear();
+
+                        outFile->close();
+                        delete outFile;
+                        return false;
+                    }
                     msgOutput.append("SG_MUL_VAL_ " + QString::number(ID) + " ");
                     msgOutput.append(sig->name + " " + sig->multiplexParent->name + " ");
                     msgOutput.append(QString::number(sig->multiplexLowValue) + "-" + QString::number(sig->multiplexHighValue) + ";");
