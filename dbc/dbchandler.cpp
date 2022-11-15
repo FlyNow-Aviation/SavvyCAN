@@ -1598,7 +1598,7 @@ bool DBCFile::saveFile(QString fileName)
                 if (sig->isMultiplexed)
                 {
                     msgOutput.append("SG_MUL_VAL_ " + QString::number(ID) + " ");
-                    msgOutput.append(sig->name + " " + sig->parentMessage->name + " ");
+                    msgOutput.append(sig->name + " " + sig->multiplexParent->name + " ");
                     msgOutput.append(QString::number(sig->multiplexLowValue) + "-" + QString::number(sig->multiplexHighValue) + ";");
                     msgOutput.append("\n");
                     outFile->write(msgOutput.toUtf8());
